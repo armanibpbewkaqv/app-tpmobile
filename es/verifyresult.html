@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>verificacion de email</title>
+    <link rel="stylesheet" href="../css/email_verify.css">
+</head>
+<body>
+    <div class="container">
+        <div class="success-wrap" id="success_wrap">
+            <img src="../img/email-verify-success.png" alt="success">
+            <div>¡Felicidades!</div>
+        </div>
+
+        <div class="success-wrap-2" id="success_wrap_2">
+            Tienes <span class="green"><span id="point_value"></span> puntos</span>
+        </div>
+
+        <div class="fail-wrap" id="fail_wrap">
+            <img src="../img/email-verify-fail.png" alt="success">
+            <div>Desafortunadamente, su enlace actual está roto o ya no es válido. (más de 72 horas)</div>
+            <div class="hint">Si tiene alguna pregunta, comuníquese con <a href="mailto:foortweldone@gmail.com">foortweldone@gmail.com</a></div>
+        </div>
+
+        <a class="shopping-btn" href="/">ir de compras</div>
+    </div>
+
+    <script>
+        var search = window.location.search.substring(1)
+        var searchArray = search.split("&");
+        for (var i = 0; i < searchArray.length; i++) {
+            var item = searchArray[i];
+            var itemArray = item.split("=");
+            if (itemArray[0] === 'code') {
+                var result = itemArray[1]
+                if (result === '0') {
+                    document.getElementById('success_wrap').style.display = 'block'
+                    document.getElementById('success_wrap_2').style.display = 'block'
+                    document.getElementById('fail_wrap').style.display = 'none'
+                } else if (result === 'EC1023') {
+                    document.getElementById('success_wrap').style.display = 'block'
+                    document.getElementById('success_wrap_2').style.display = 'none'
+                    document.getElementById('fail_wrap').style.display = 'none'
+                } else if (result === 'EC1022') {
+                    document.getElementById('success_wrap').style.display = 'none'
+                    document.getElementById('success_wrap_2').style.display = 'none'
+                    document.getElementById('fail_wrap').style.display = 'block'
+                } 
+            } else if (itemArray[0] === 'points') {
+                document.getElementById('point_value').innerHTML = itemArray[1]
+            }
+        }
+    </script>
+</body>
+</html>
